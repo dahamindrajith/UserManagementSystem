@@ -86,7 +86,7 @@ public class UserdaoImpl implements Userdao {
         
         try {
             
-            String sql="SELECT name FROM ums_main WHERE rqst_id=?";
+            String sql="SELECT name FROM ums_main WHERE user_id=?";
             
             PreparedStatement ps=connection.prepareStatement(sql);
             ps.setString(1, userId);
@@ -105,6 +105,52 @@ public class UserdaoImpl implements Userdao {
         
         return rtnVlue;
         
+    }
+    
+    public String updateUser(User user,String userId) {
+    	
+    	DbConnection conn = new DbConnection();
+        Connection connection = conn.getConnection();
+    	System.out.println("------"+user.getName()+"  "+user.getDiscription()+"   "+userId);
+        String rtnVlue="Faill";
+    	try {
+    		
+    		String sql="UPDATE ums_main set name=?, discription=? WHERE user_id=?";
+    		
+    		int result = jdbcTemplate.update(sql, user.getName(), user.getDiscription(), userId);
+    		
+    		if(result>0) {
+    			rtnVlue="Success";
+    		}
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+    	
+    	return rtnVlue;
+    }
+    
+    public String deleteUser(String userId) {
+    	
+    	String rtnVlue="Faill";
+    	try {
+    		
+    		String sql="UPDATE ums_main set status=? WHERE user_id=?";
+    		
+    		int result=jdbcTemplate.update(sql,0,userId);
+    		
+    		if(result>0) {
+    			rtnVlue="Success";
+    		}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+    	
+    	return rtnVlue;
+    	
     }
 
 }

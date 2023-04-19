@@ -9,4 +9,8 @@ public interface Userdao {
     String createUser(User user);
     
     List<User> getAllUser();
+
+	String updateUser(User user, String userId);
+
+	String deleteUser(String userId);
 }

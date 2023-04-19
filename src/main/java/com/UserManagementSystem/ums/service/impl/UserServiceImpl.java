@@ -21,4 +21,12 @@ public List<User> getAllUser(){
     return userdao.getAllUser();
 }
 
+public String updateUser(User user, String userId) {
+	return userdao.updateUser(user,userId);
+	
+}
+public String deleteUser(String userId) {
+	return userdao.deleteUser(userId);
+}
+
 }
